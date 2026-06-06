@@ -397,7 +397,7 @@ export default function SeniorCompanionPage() {
         .sc-compare__col--solo { color: var(--heritage-muted); }
         .sc-compare__col--with {
           color: var(--heritage-ink);
-          background: rgba(0, 95, 115, 0.06);
+          background: var(--heritage-rust-tint);
         }
         .sc-compare__row--head .sc-compare__col {
           background: var(--heritage-ink);

@@ -5,6 +5,10 @@ import SiteFooter from "./SiteFooter";
 import Testimonials from "./Testimonials";
 import HomeCelebrations from "./HomeCelebrations";
 import HomeItineraries from "./HomeItineraries";
+import HomeAbout from "./HomeAbout";
+import HomeFAQ from "./HomeFAQ";
+import HomeJourney from "./HomeJourney";
+import TornDivider from "./TornDivider";
 import Reveal from "./GSAPReveal";
 import { STATES } from "@/data/states";
 import { TESTIMONIALS } from "@/data/testimonials";
@@ -14,14 +18,19 @@ export default function HomeBelow() {
     <div className="home-below is-site" id="home-below">
       <SiteHeader />
 
-      <HomeItineraries />
+      <HomeAbout />
 
-      <section className="site-section site-section--cream2 home-states-section">
-        <div className="site-container">
+      <TornDivider seed={2} color="var(--paper-1)" />
+
+      <section className="site-section home-states-section">
+        <div className="site-container home-states__wrap">
           <Reveal className="home-states__head">
             <span className="eyebrow">Five South Indian states</span>
             <h2 className="section-title home-states__title">
-              Five states. A thousand stories.
+              Five states.{" "}
+              <span className="home-states__title-accent">
+                A thousand stories.
+              </span>
             </h2>
             <p className="section-lead home-states__lead">
               Each one carved by centuries of devotion, craft, and quiet
@@ -32,7 +41,11 @@ export default function HomeBelow() {
           <div className="home-states">
             {STATES.map((state, i) => (
               <Reveal key={state.slug} delay={(i % 4) as 0 | 1 | 2 | 3}>
-                <Link href={`/states/${state.slug}`} className="home-state-card">
+                <Link
+                  href={`/states/${state.slug}`}
+                  className="home-state-card"
+                  aria-label={`${state.name} — explore`}
+                >
                   <div className="home-state-card__media">
                     <Image
                       src={state.hero}
@@ -45,26 +58,40 @@ export default function HomeBelow() {
                   </div>
                   <div className="home-state-card__body">
                     <h3>{state.name}</h3>
-                    <p>{state.tagline}</p>
-                    <span className="home-state-card__cta">
-                      <span>Explore Now</span>
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="14"
-                        height="14"
+                    <ul className="home-state-card__list">
+                      {state.highlights.map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                    <div className="home-state-card__foot">
+                      <div className="home-state-card__tags">
+                        {state.tags.map((t) => (
+                          <span key={t} className="home-state-card__tag">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <span
+                        className="home-state-card__go"
                         aria-hidden="true"
-                        className="home-state-card__cta-arrow"
                       >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M5 12h14M13 6l6 6-6 6"
-                        />
-                      </svg>
-                    </span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="16"
+                          height="16"
+                          className="home-state-card__go-arrow"
+                        >
+                          <path
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 12h14M13 6l6 6-6 6"
+                          />
+                        </svg>
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </Reveal>
@@ -73,10 +100,23 @@ export default function HomeBelow() {
         </div>
       </section>
 
+      <TornDivider seed={3} color="#2d2d2d" />
+
+      <HomeItineraries />
+
+      <TornDivider seed={4} color="var(--paper-1)" />
+
       <HomeCelebrations />
 
-      <section className="site-section">
-        <div className="site-container">
+      <TornDivider seed={6} color="var(--paper-1)" />
+
+      <HomeJourney />
+
+      <TornDivider seed={7} color="var(--paper-1)" />
+
+      <section className="site-section home-tmt">
+        <div className="sec-map" aria-hidden="true" style={{ backgroundPosition: "left center" }} />
+        <div className="site-container home-tmt__wrap">
           <Testimonials
             items={TESTIMONIALS.slice(0, 3)}
             heading="What travellers tell us"
@@ -90,28 +130,9 @@ export default function HomeBelow() {
         </div>
       </section>
 
-      <section className="site-section site-section--ink home-final-cta">
-        <div className="site-container home-final-cta__inner">
-          <Reveal>
-            <span className="eyebrow">Ready when you are</span>
-            <h2>Plan a journey at your own pace.</h2>
-            <p>
-              Tell us where you&rsquo;d like to go and we&rsquo;ll build the
-              itinerary around it, including darshan arrangements, a senior
-              companion if you&rsquo;d like one, and everything between
-              pick-up and drop-off.
-            </p>
-            <div className="home-final-cta__buttons">
-              <Link href="/tours/custom" className="btn btn--primary btn--lg">
-                Customize a trip
-              </Link>
-              <Link href="/contact" className="btn btn--ghost btn--lg">
-                Talk to a planner
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <TornDivider seed={8} color="var(--paper-1)" />
+
+      <HomeFAQ />
 
       <SiteFooter />
 
@@ -119,48 +140,72 @@ export default function HomeBelow() {
         /* Cover the body teal that bleeds through during fast scroll
            transitions on the home page only. */
         .home-below {
+          --paper-1: #f4f2ef;
+          --paper-2: #ede9e4;
           background: var(--heritage-cream);
           position: relative;
           z-index: 1;
         }
+        /* faint paper fiber texture across the parchment home */
+        .home-below::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          pointer-events: none;
+          background-image: radial-gradient(rgba(134, 109, 75, 0.05) 1px, transparent 1px);
+          background-size: 24px 24px;
+          opacity: 0.5;
+        }
+        .home-below > * { position: relative; z-index: 1; }
+        .home-below > .torn { z-index: 3; }
         .home-featured__more {
           margin-top: 2.25rem;
           text-align: center;
         }
+        .home-states-section {
+          background: #2d2d2d;
+          position: relative;
+          overflow: hidden;
+        }
+        .home-states__wrap { position: relative; z-index: 1; }
+        .home-tmt { position: relative; overflow: hidden; }
+        .home-tmt__wrap { position: relative; z-index: 1; }
         .home-states-section > .site-container {
-          max-width: none;
-          padding-inline: clamp(1rem, 3vw, 3rem);
+          max-width: 108rem;
+          margin-inline: auto;
         }
         @media (min-width: 961px) {
           .home-states-section {
-            min-height: 100svh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             padding-block: clamp(2rem, 5vh, 4rem);
           }
         }
         .home-states__head {
           text-align: center;
-          margin-bottom: 5rem;
+          margin-bottom: 4rem;
         }
         .home-states__head .eyebrow {
           justify-content: center;
+          color: var(--accent-orange);
         }
         .is-site .home-states__title {
-          font-family: var(--font-fraunces), serif;
-          font-size: clamp(3rem, 7vw, 6rem);
+          font-family: var(--font-poppins), sans-serif;
+          font-size: clamp(2.25rem, 5vw, 4rem);
           font-weight: 700;
-          color: var(--heritage-ink);
-          letter-spacing: -0.025em;
-          line-height: 1;
+          color: #ffffff;
+          text-transform: uppercase;
+          letter-spacing: 0.01em;
+          line-height: 1.05;
           margin: 0.5rem 0 0.75rem;
+        }
+        .home-states__title-accent {
+          color: var(--accent-orange);
         }
         .is-site .home-states__lead {
           margin-inline: auto;
           max-width: 44rem;
           font-size: clamp(1.0625rem, 1.15vw, 1.1875rem);
-          color: var(--heritage-sub);
+          color: rgba(255, 255, 255, 0.7);
         }
         .home-states {
           display: grid;
@@ -174,15 +219,15 @@ export default function HomeBelow() {
           text-decoration: none;
           border-radius: var(--radius-lg);
           overflow: hidden;
-          aspect-ratio: 3 / 4;
+          aspect-ratio: 6 / 7;
           background: var(--heritage-cream-2);
-          box-shadow: 0 0 2.5rem -0.9375rem rgba(0, 95, 115, 0.45);
+          box-shadow: 0 0 2.5rem -0.9375rem rgba(0, 0, 0, 0.35);
           transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
                       box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .home-state-card:hover {
           color: #fff;
-          box-shadow: 0 0 3.75rem -0.9375rem rgba(0, 95, 115, 0.7);
+          box-shadow: 0 0 3.75rem -0.9375rem rgba(0, 0, 0, 0.55);
         }
         .home-state-card__media { position: absolute; inset: 0; }
         .home-state-card__media img {
@@ -196,48 +241,94 @@ export default function HomeBelow() {
           inset: 0;
           background: linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.7) 0%,
-            rgba(0, 0, 0, 0.25) 30%,
-            transparent 55%
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.5) 30%,
+            transparent 65%
           );
         }
         .home-state-card__body {
           position: absolute;
           inset: auto 0 0 0;
-          padding: 1.5rem;
+          padding: 1.25rem;
           z-index: 2;
         }
         .home-state-card__body h3 {
-          font-family: var(--font-fraunces), serif;
+          font-family: var(--font-poppins), sans-serif;
           color: #fff;
-          font-size: 1.5rem;
-          margin-bottom: 0.125rem;
-          font-weight: 700;
-          letter-spacing: -0.01em;
-        }
-        .home-state-card__body p {
-          font-family: var(--font-fraunces);
-          font-style: italic;
-          color: var(--heritage-gold);
-          font-size: 0.8125rem;
+          font-size: 1.125rem;
           margin: 0;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
         }
-        .home-state-card__cta {
-          margin-top: 1rem;
-          display: inline-flex;
+        .home-state-card__list {
+          list-style: none;
+          padding: 0;
+          margin: 0.5rem 0 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.28rem;
+        }
+        .home-state-card__list li {
+          display: flex;
           align-items: center;
-          gap: 0.375rem;
+          gap: 0.5rem;
           font-family: var(--font-poppins);
-          font-size: 0.8125rem;
+          font-size: 0.78rem;
+          line-height: 1.3;
+          color: rgba(255, 255, 255, 0.92);
+        }
+        .home-state-card__list li::before {
+          content: "";
+          flex-shrink: 0;
+          width: 0.3rem;
+          height: 0.3rem;
+          border-radius: 50%;
+          background: var(--accent-orange);
+        }
+        .home-state-card__foot {
+          margin-top: 0.85rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.5rem;
+        }
+        .home-state-card__tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.4rem;
+        }
+        .home-state-card__tag {
+          padding: 0.3rem 0.7rem;
+          font-family: var(--font-poppins);
+          font-size: 0.68rem;
           font-weight: 600;
           letter-spacing: 0.02em;
-          color: #ffffff;
+          color: #fff;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          border-radius: var(--radius-pill);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
         }
-        .home-state-card__cta-arrow {
-          transition: transform 0.3s ease;
+        .home-state-card__go {
+          flex-shrink: 0;
+          width: 2.25rem;
+          height: 2.25rem;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #0c2340;
+          background: rgba(255, 255, 255, 0.92);
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
+          transition: transform 0.3s ease, background 0.3s ease;
         }
-        .home-state-card:hover .home-state-card__cta-arrow {
-          transform: translateX(0.25rem);
+        .home-state-card:hover .home-state-card__go {
+          background: #fff;
+          transform: scale(1.06);
         }
         .home-final-cta__inner {
           max-width: 42rem;

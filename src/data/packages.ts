@@ -259,7 +259,7 @@ export const PACKAGES: Package[] = [
   },
   {
     slug: "tirupati-srisailam-4d",
-    title: "Tirupati & Srisailam, 4 Days",
+    title: "Tirupati and Srisailam, 4 Days",
     kind: "group",
     states: ["andhra-pradesh"],
     durationDays: 4,
@@ -375,7 +375,7 @@ export const PACKAGES: Package[] = [
   },
   {
     slug: "private-meenakshi-rameshwaram-5d",
-    title: "Private Meenakshi & Rameshwaram, 5 Days",
+    title: "Private Meenakshi and Rameshwaram, 5 Days",
     kind: "private",
     states: ["tamil-nadu"],
     durationDays: 5,
@@ -460,7 +460,7 @@ export const PACKAGES: Package[] = [
   },
   {
     slug: "private-karnataka-coast-7d",
-    title: "Private Karnataka Coast & Hampi, 7 Days",
+    title: "Private Karnataka Coast and Hampi, 7 Days",
     kind: "private",
     states: ["karnataka"],
     durationDays: 7,
@@ -628,7 +628,7 @@ export const PACKAGES: Package[] = [
   /* ---------------- Weekend & short trips ---------------- */
   {
     slug: "weekend-bengaluru-mysore-2d",
-    title: "Bengaluru & Mysore Weekend, 2 Days",
+    title: "Bengaluru and Mysore Weekend, 2 Days",
     kind: "group",
     states: ["karnataka"],
     durationDays: 2,
@@ -663,7 +663,7 @@ export const PACKAGES: Package[] = [
   },
   {
     slug: "weekend-chennai-mahabalipuram-2d",
-    title: "Chennai & Mahabalipuram Weekend, 2 Days",
+    title: "Chennai and Mahabalipuram Weekend, 2 Days",
     kind: "group",
     states: ["tamil-nadu"],
     durationDays: 2,
@@ -830,7 +830,7 @@ export const PACKAGES: Package[] = [
   /* ---------------- Hill stations ---------------- */
   {
     slug: "hills-munnar-thekkady-5d",
-    title: "Kerala Hills: Munnar & Thekkady, 5 Days",
+    title: "Kerala Hills: Munnar and Thekkady, 5 Days",
     kind: "group",
     states: ["kerala"],
     durationDays: 5,
@@ -868,7 +868,7 @@ export const PACKAGES: Package[] = [
   },
   {
     slug: "hills-coorg-ooty-6d",
-    title: "Coorg & Ooty Hill Journey, 6 Days",
+    title: "Coorg and Ooty Hill Journey, 6 Days",
     kind: "group",
     states: ["karnataka", "tamil-nadu"],
     durationDays: 6,
@@ -1067,7 +1067,7 @@ export const PACKAGES: Package[] = [
   },
   {
     slug: "hampi-badami-heritage-6d",
-    title: "Hampi & Badami Heritage Trail, 6 Days",
+    title: "Hampi and Badami Heritage Trail, 6 Days",
     kind: "group",
     states: ["karnataka"],
     durationDays: 6,
@@ -1106,7 +1106,7 @@ export const PACKAGES: Package[] = [
   },
   {
     slug: "pondicherry-auroville-4d",
-    title: "Pondicherry & Auroville Calm, 4 Days",
+    title: "Pondicherry and Auroville Calm, 4 Days",
     kind: "group",
     states: ["tamil-nadu"],
     durationDays: 4,

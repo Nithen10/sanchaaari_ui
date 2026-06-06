@@ -82,7 +82,7 @@ const IMG = {
   templeAlt1: "https://images.unsplash.com/photo-1759134334340-9398d9814bcb?w=1600&q=80&auto=format&fit=crop",
   templeAlt2: "https://images.unsplash.com/photo-1614094082869-cd4e4b2905c7?w=1600&q=80&auto=format&fit=crop",
   templeAlt3: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1600&q=80&auto=format&fit=crop",
-  cultural: "https://images.unsplash.com/photo-1567010807122-b0db7dd45a4f?w=1600&q=80&auto=format&fit=crop",
+  cultural: "https://images.unsplash.com/photo-1768491815837-87a90744f9e6?w=1600&q=80&auto=format&fit=crop",
   diyas: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1600&q=80&auto=format&fit=crop",
   tirupati: "/images/tirupati-temple.png",
   ramappa: "/images/ramappa-temple.png",
@@ -102,7 +102,7 @@ export const CELEBRATIONS: Celebration[] = [
     months: ["January"],
     states: ["tamil-nadu"],
     interests: ["Harvest & Seasonal", "Cultural & Folk", "Food & Cuisine"],
-    image: IMG.cultural,
+    image: "https://images.unsplash.com/photo-1732603891196-2b8cc24f39a5?w=1600&q=80&auto=format&fit=crop",
     shortBlurb: "Tamil Nadu’s four-day harvest thanksgiving.",
     description:
       "Pongal is the most important harvest festival of Tamil Nadu, celebrated over four days as Bhogi, Thai Pongal, Mattu Pongal and Kaanum Pongal. Households cook fresh rice with milk and jaggery in clay pots until it boils over — a symbol of abundance. Cattle are bathed, garlanded and honoured on the third day.",
@@ -1756,7 +1756,7 @@ export const CELEBRATIONS: Celebration[] = [
     months: ["January"],
     states: ["andhra-pradesh", "telangana"],
     interests: ["Harvest & Seasonal", "Cultural & Folk", "Food & Cuisine"],
-    image: IMG.cultural,
+    image: "https://images.unsplash.com/photo-1646812281105-6f20622792e6?w=1600&q=80&auto=format&fit=crop",
     shortBlurb: "Bonfires, rangolis and the harvest meal.",
     description:
       "Bhogi on Day One — predawn bonfires of old wood and household discards. Sankranti on Day Two — rangolis with cow dung balls (gobbemma) at every doorstep, gangireddulu cattle troupes parading the streets, and a sweet sesame pongali at noon. Kanuma on Day Three honours the cattle.",
@@ -1864,7 +1864,7 @@ export const CELEBRATIONS: Celebration[] = [
     months: ["February"],
     states: ["andhra-pradesh"],
     interests: ["Religious & Spiritual"],
-    image: IMG.tirupati,
+    image: "https://images.unsplash.com/photo-1748944088887-dbcac01ac2eb?w=1600&q=80&auto=format&fit=crop",
     shortBlurb: "An all-night Jyotirlinga vigil in the Nallamala forest.",
     description:
       "Srisailam’s Mallikarjuna Swamy temple holds four prahara pujas through the night, with abhishekams of milk, panchamruta, sandalwood and bilva. The chariot procession the following morning passes through pine and teak forest.",
@@ -2592,7 +2592,7 @@ export const CELEBRATIONS: Celebration[] = [
     months: ["September"],
     states: ["tamil-nadu", "kerala", "karnataka", "andhra-pradesh", "telangana"],
     interests: ["Religious & Spiritual", "Cultural & Folk"],
-    image: IMG.templeAlt1,
+    image: "https://images.unsplash.com/photo-1641730259879-ad98e7db7bcb?w=1600&q=80&auto=format&fit=crop",
     shortBlurb: "Krishna’s midnight birth.",
     description:
       "Households fast until midnight when Krishna is said to have been born. Tiny baby Krishna footprints in rice flour are drawn from the doorstep to the puja room. Udupi, Guruvayur and the ISKCON temples hold all-night kirtans.",

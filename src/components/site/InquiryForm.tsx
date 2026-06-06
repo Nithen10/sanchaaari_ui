@@ -263,7 +263,7 @@ export default function InquiryForm({
         .inquiry-form__error {
           color: var(--heritage-rust-dk);
           font-weight: 600;
-          background: rgba(0,95,115,0.08);
+          background: var(--heritage-rust-tint);
           padding: 0.75rem 1rem;
           border-radius: var(--radius-md);
         }

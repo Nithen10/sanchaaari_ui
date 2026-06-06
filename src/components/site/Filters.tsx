@@ -6,7 +6,7 @@ import type { StateSlug } from "@/data/states";
 import { STATES } from "@/data/states";
 import { formatINR } from "@/lib/format";
 import { cn } from "@/lib/cn";
-import PackageCard from "./PackageCard";
+import JourneyCard from "./JourneyCard";
 
 interface Props {
   packages: Package[];
@@ -235,15 +235,19 @@ export default function Filters({ packages, lockedKind }: Props) {
             </button>
           </div>
         ) : (
-          <div className="grid-cards">
+          <div className="grid-cards jcard-grid">
             {filtered.map((p) => (
-              <PackageCard key={p.slug} pkg={p} />
+              <JourneyCard key={p.slug} pkg={p} variant="grid" />
             ))}
           </div>
         )}
       </div>
 
       <style>{`
+        .jcard-grid {
+          grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
+          gap: 1.25rem;
+        }
         .filters-wrap {
           display: grid;
           grid-template-columns: 16rem minmax(0, 1fr);

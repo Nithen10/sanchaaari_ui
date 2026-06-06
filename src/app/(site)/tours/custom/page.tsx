@@ -299,7 +299,7 @@ export default function CustomTripPage() {
             </section>
 
             {error && (
-              <p role="alert" className="inquiry-form__error" style={{ background: "rgba(0,95,115,0.08)", padding: "0.75rem 1rem", borderRadius: "var(--radius-md)", color: "var(--heritage-rust-dk)", fontWeight: 600 }}>
+              <p role="alert" className="inquiry-form__error" style={{ background: "var(--heritage-rust-tint)", padding: "0.75rem 1rem", borderRadius: "var(--radius-md)", color: "var(--heritage-rust-dk)", fontWeight: 600 }}>
                 {error}
               </p>
             )}

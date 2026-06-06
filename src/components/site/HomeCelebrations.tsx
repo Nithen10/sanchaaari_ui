@@ -1,313 +1,238 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./GSAPReveal";
-import CelebrationCard from "./CelebrationCard";
-import {
-  CELEBRATIONS,
-  INTERESTS,
-  MONTHS,
-  type CelebrationKind,
-  type Interest,
-  type MonthName,
-} from "@/data/celebrations";
-import { STATES, type StateSlug } from "@/data/states";
-
-const STRIP_COUNT = 8;
+import { CELEBRATIONS, type Celebration } from "@/data/celebrations";
 
 export default function HomeCelebrations() {
-  const [kind, setKind] = useState<CelebrationKind>("festival");
-  const [month, setMonth] = useState<MonthName | "all">("all");
-  const [stateFilter, setStateFilter] = useState<StateSlug | "all">("all");
-  const [interest, setInterest] = useState<Interest | "all">("all");
+  // Home features exactly these two festivals (full list lives on /celebrations).
+  const pairs = useMemo(() => {
+    const FEATURED = ["krishna-janmashtami-2026", "maha-shivaratri-srisailam-2026"];
+    const all = CELEBRATIONS.filter((c) => c.kind === "festival" && c.image);
+    const ordered = FEATURED.map((slug) =>
+      all.find((c) => c.slug === slug),
+    ).filter((c): c is Celebration => Boolean(c));
+    const out: Celebration[][] = [];
+    for (let i = 0; i < ordered.length; i += 2) out.push(ordered.slice(i, i + 2));
+    return out;
+  }, []);
 
-  const filtered = useMemo(() => {
-    return CELEBRATIONS.filter((c) => c.kind === kind)
-      .filter((c) => month === "all" || c.months.includes(month))
-      .filter((c) => stateFilter === "all" || c.states.includes(stateFilter))
-      .filter((c) => interest === "all" || c.interests.includes(interest))
-      .sort((a, b) => a.startDate.localeCompare(b.startDate))
-      .slice(0, STRIP_COUNT);
-  }, [kind, month, stateFilter, interest]);
+  const [pairIndex, setPairIndex] = useState(0);
+  const pair = pairs[pairIndex] ?? [];
+  const big = pair[0];
+  const small = pair[1];
+
+  if (!big) return null;
+
+  const next = () => setPairIndex((p) => (p + 1) % pairs.length);
 
   return (
-    <section className="site-section home-celebrations">
-      <div className="site-container site-container--wide">
-        <Reveal>
-          <div className="home-celebrations__head">
-            <h2 className="home-celebrations__title">The Festive South</h2>
-            <p className="home-celebrations__tagline">
-              <span className="home-celebrations__tagline-rule" aria-hidden="true" />
-              <span>Sanchaari signature</span>
-              <span className="home-celebrations__tagline-rule" aria-hidden="true" />
-            </p>
-            <p className="section-lead home-celebrations__lead">
-              Festivals and important events across Tamil Nadu, Kerala, Karnataka,
-              Andhra Pradesh and Telangana for 2026. Filter by month, state, or
-              interest — tap a card to read the full story.
-            </p>
-          </div>
+    <section className="site-section fest">
+      <div className="site-container fest__grid">
+        {/* TOP-LEFT — heading */}
+        <Reveal className="fest__intro" from="left">
+          <span className="fest__eyebrow">Sanchaari signature</span>
+          <h2 className="fest__title">The Festive South</h2>
+          <p className="fest__lead">
+            A few of the season&rsquo;s most vivid celebrations across the South.
+            Browse the full calendar — filter by month, state or interest — on the{" "}
+            <Link href="/celebrations" className="fest__lead-link">
+              festivals page
+            </Link>
+            .
+          </p>
+          {pairs.length > 1 && (
+            <div className="fest__actions">
+              <button type="button" className="btn btn--primary" onClick={next}>
+                Discover more
+              </button>
+            </div>
+          )}
         </Reveal>
 
-        <div className="home-celebrations__controls" role="toolbar" aria-label="Filter celebrations">
-          <div className="home-celebrations__tabs" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={kind === "festival"}
-              className={kind === "festival" ? "is-active" : ""}
-              onClick={() => setKind("festival")}
-            >
-              Festivals
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={kind === "event"}
-              className={kind === "event" ? "is-active" : ""}
-              onClick={() => setKind("event")}
-            >
-              Events
-            </button>
-          </div>
+        {/* TOP-RIGHT — large image (festival A) */}
+        <Link
+          key={`big-${pairIndex}`}
+          href={`/celebrations/${big.slug}`}
+          className="fest__big fest__tile"
+          aria-label={`${big.name}, ${big.dateLabel}`}
+        >
+          <Image
+            src={big.image}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 30rem"
+            style={{ objectFit: "cover" }}
+          />
+          <span className="fest__date">{big.dateLabel}</span>
+        </Link>
 
-          <label className="home-celebrations__select">
-            <span className="sr-only">By Month</span>
-            <select
-              value={month}
-              onChange={(e) => setMonth(e.target.value as MonthName | "all")}
-            >
-              <option value="all">By Month</option>
-              {MONTHS.map((m) => (
-                <option key={m} value={m}>
-                  {m}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="home-celebrations__select">
-            <span className="sr-only">By States &amp; UTs</span>
-            <select
-              value={stateFilter}
-              onChange={(e) => setStateFilter(e.target.value as StateSlug | "all")}
-            >
-              <option value="all">By States &amp; UTs</option>
-              {STATES.map((s) => (
-                <option key={s.slug} value={s.slug}>
-                  {s.name}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="home-celebrations__select">
-            <span className="sr-only">By Interests</span>
-            <select
-              value={interest}
-              onChange={(e) => setInterest(e.target.value as Interest | "all")}
-            >
-              <option value="all">By Interests</option>
-              {INTERESTS.map((i) => (
-                <option key={i} value={i}>
-                  {i}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        {filtered.length === 0 ? (
-          <p className="home-celebrations__empty">
-            No {kind === "festival" ? "festivals" : "events"} match these
-            filters. Try clearing one.
-          </p>
+        {/* BOTTOM-LEFT — medium image (festival B) */}
+        {small ? (
+          <Link
+            key={`small-${pairIndex}`}
+            href={`/celebrations/${small.slug}`}
+            className="fest__small fest__tile"
+            aria-label={`${small.name}, ${small.dateLabel}`}
+          >
+            <Image
+              src={small.image}
+              alt=""
+              fill
+              sizes="(max-width: 768px) 100vw, 21rem"
+              style={{ objectFit: "cover" }}
+            />
+            <span className="fest__date">{small.dateLabel}</span>
+          </Link>
         ) : (
-          <div className="home-celebrations__grid">
-            {filtered.map((c, i) => (
-              <Reveal key={c.slug} delay={(i % 4) as 0 | 1 | 2 | 3}>
-                <CelebrationCard c={c} />
-              </Reveal>
-            ))}
+          <div className="fest__small fest__small--empty" aria-hidden="true" />
+        )}
+
+        {/* BOTTOM-RIGHT (row 3) — text block (festival B) */}
+        {small && (
+          <div key={`btext-${pairIndex}`} className="fest__textb">
+            <h3 className="fest__name">{small.name}</h3>
+            <p className="fest__blurb">{small.shortBlurb}</p>
+            <Link href={`/celebrations/${small.slug}`} className="fest__read">
+              Read the story
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 12h14M13 6l6 6-6 6"
+                />
+              </svg>
+            </Link>
           </div>
         )}
 
-        <div className="home-celebrations__more">
-          <Link href="/celebrations" className="btn btn--primary btn--lg">
-            Discover more
+        {/* BOTTOM-RIGHT — text block (festival A) */}
+        <div key={`text-${pairIndex}`} className="fest__text">
+          <h3 className="fest__name">{big.name}</h3>
+          <p className="fest__blurb">{big.shortBlurb}</p>
+          <Link href={`/celebrations/${big.slug}`} className="fest__read">
+            Read the story
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 12h14M13 6l6 6-6 6"
+              />
+            </svg>
           </Link>
         </div>
       </div>
 
+      <div className="fest__footer">
+        <Link href="/celebrations" className="fest__viewall">
+          View all festivals →
+        </Link>
+      </div>
+
       <style>{`
-        .is-site .home-celebrations__head {
-          text-align: center;
-          margin-bottom: 4rem;
-        }
-        .is-site .home-celebrations__eyebrow {
-          justify-content: center;
-          font-style: italic;
-          font-family: var(--font-fraunces);
-          letter-spacing: 0;
-          font-weight: 500;
-          text-transform: none;
-          font-size: 0.8125rem;
-          color: var(--heritage-rust);
-        }
-        .is-site .home-celebrations__eyebrow::before { display: none; }
-
-        .is-site .home-celebrations__title {
-          font-family: var(--font-fraunces), serif;
-          font-size: clamp(3.25rem, 7.5vw, 6.5rem);
-          font-weight: 700;
-          color: var(--heritage-ink);
-          letter-spacing: -0.025em;
-          line-height: 1;
-          margin: 0.5rem 0 0.75rem;
-          text-transform: none;
-        }
-        .is-site .home-celebrations__tagline {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.875rem;
-          font-family: var(--font-fraunces);
-          font-style: italic;
-          color: var(--heritage-gold);
-          font-size: clamp(1.125rem, 1.5vw, 1.5rem);
-          letter-spacing: 0.01em;
-          margin: 0;
-        }
-        .is-site .home-celebrations__tagline-rule {
-          display: inline-block;
-          width: clamp(2rem, 4vw, 4rem);
-          height: 1px;
-          background: currentColor;
-          opacity: 0.55;
-        }
-        .is-site .home-celebrations__lead {
-          margin-inline: auto;
-          max-width: 62rem;
-          font-size: clamp(1.0625rem, 1.15vw, 1.1875rem);
-          color: var(--heritage-sub);
-        }
-
-        .is-site .home-celebrations__controls {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.75rem;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 2.5rem;
-        }
-        .is-site .home-celebrations__tabs {
-          display: inline-flex;
-          background: var(--heritage-cream-2);
-          border-radius: var(--radius-pill);
-          padding: 0.3125rem;
-        }
-        .is-site .home-celebrations__tabs button {
-          border: 0;
-          background: transparent;
-          padding: 0.5625rem 1.375rem;
-          border-radius: var(--radius-pill);
-          cursor: pointer;
-          font-family: var(--font-poppins);
-          font-weight: 600;
-          font-size: 0.9375rem;
-          color: var(--heritage-sub);
-          transition: background var(--transition-fast), color var(--transition-fast);
-        }
-        .is-site .home-celebrations__tabs button.is-active {
-          background: var(--heritage-rust);
-          color: var(--heritage-ivory);
-        }
-        .is-site .home-celebrations__tabs button:hover:not(.is-active) {
-          color: var(--heritage-ink);
-        }
-
-        .is-site .home-celebrations__select {
-          display: inline-flex;
-        }
-        .is-site .home-celebrations__select select {
-          appearance: none;
-          -webkit-appearance: none;
-          padding: 0.6875rem 2.25rem 0.6875rem 1.125rem;
-          border-radius: var(--radius-pill);
-          border: 1px solid var(--heritage-line-strong);
-          background: var(--heritage-ivory)
-            url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%231f2937' d='M6 8 0 0h12z'/></svg>")
-            no-repeat right 0.9rem center;
-          background-size: 0.625rem 0.45rem;
-          font-family: var(--font-poppins);
-          font-weight: 600;
-          font-size: 0.9375rem;
-          color: var(--heritage-ink);
-          cursor: pointer;
-          min-height: var(--tap-target);
-        }
-        .is-site .home-celebrations__select select:focus-visible {
-          outline: 2px solid var(--heritage-rust);
-          outline-offset: 2px;
-        }
-
-        .is-site .home-celebrations__grid {
+        .fest__footer { text-align: center; margin-top: clamp(2.5rem, 5vw, 4.5rem); }
+        .fest__grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1.125rem;
+          max-width: 82rem;
+          margin-inline: auto;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas:
+            "intro big"
+            "text  big"
+            "small smalltext";
+          column-gap: clamp(2rem, 4vw, 4rem);
+          row-gap: clamp(1.25rem, 2.5vw, 2rem);
+          align-items: start;
+        }
+        .fest__intro { grid-area: intro; }
+        .fest__big { grid-area: big; justify-self: end; align-self: start; width: 100%; max-width: 30rem; }
+        .fest__small { grid-area: small; justify-self: start; width: 100%; max-width: 21rem; margin-top: clamp(1.5rem, 1.5vw, 3.5rem); }
+        .fest__text { grid-area: text; align-self: center; justify-self: end; max-width: 28rem; margin-right: clamp(-6rem, -4vw, -2.5rem); margin-top: clamp(4rem, 7vw, 9rem); }
+        .fest__textb { grid-area: smalltext; align-self: center; justify-self: start; max-width: 28rem; margin-left: clamp(-16rem, -13vw, -9rem); margin-top: clamp(11rem, 17vw, 22rem); }
+
+        .is-site .fest__eyebrow {
+          display: inline-block;
+          font-family: var(--font-fraunces); font-style: italic; font-weight: 500;
+          font-size: clamp(0.9rem, 1.2vw, 1.0625rem);
+          color: var(--heritage-gold);
+          margin-bottom: 0.5rem;
+        }
+        .is-site .fest__title {
+          font-family: var(--font-fraunces), serif;
+          font-size: clamp(2.75rem, 6vw, 5rem);
+          font-weight: 700; color: #111111;
+          letter-spacing: -0.02em; line-height: 1.02;
+          margin: 0 0 1rem; text-align: left;
+        }
+        .is-site .fest__lead {
+          font-size: clamp(1rem, 1.1vw, 1.125rem);
+          color: var(--heritage-sub); line-height: 1.65; max-width: 30rem; margin: 0;
+        }
+        .is-site .fest__lead-link { color: var(--accent-orange); font-weight: 600; }
+        .fest__actions { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 1.75rem; }
+        .is-site .fest__viewall { font-family: var(--font-poppins); font-weight: 700; font-size: 0.9375rem; color: var(--accent-orange); }
+
+        /* image tiles */
+        .fest__tile {
+          position: relative; display: block; overflow: hidden;
+          border-radius: var(--radius-md);
+          box-shadow: var(--heritage-shadow);
+          background: var(--heritage-cream-2);
+          text-decoration: none;
+        }
+        .fest__tile img { transition: transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+        .fest__tile:hover img { transform: scale(1.05); }
+        .fest__big { aspect-ratio: 5 / 6; }
+        .fest__small { aspect-ratio: 4 / 5.5; }
+        .fest__date {
+          position: absolute; top: 0.85rem; left: 0.85rem;
+          background: var(--heritage-ink); color: #fff;
+          font-family: var(--font-poppins); font-size: 0.75rem; font-weight: 600;
+          padding: 0.3rem 0.6rem; border-radius: var(--radius-sm);
+        }
+        .fest__small-name {
+          position: absolute; left: 0.85rem; right: 0.85rem; bottom: 0.85rem;
+          color: #fff; font-family: var(--font-fraunces), serif; font-weight: 600;
+          font-size: 1.0625rem; text-shadow: 0 0.2rem 0.8rem rgba(0,0,0,0.5);
         }
 
-        .is-site .home-celebrations__grid .celeb-card__media {
-          aspect-ratio: 4 / 3;
+        /* festival A text block */
+        .is-site .fest__name {
+          font-family: var(--font-fraunces), serif; font-size: clamp(1.5rem, 2.4vw, 2rem);
+          font-weight: 600; color: #111111; margin: 0 0 0.6rem; text-align: left;
         }
-        .is-site .home-celebrations__grid .celeb-card__body {
-          padding: 1rem 1rem 1.125rem;
-          min-height: 6.25rem;
-          display: flex;
-          flex-direction: column;
+        .is-site .fest__blurb { font-size: 1rem; color: var(--heritage-sub); line-height: 1.6; margin: 0 0 1rem; }
+        .is-site .fest__read {
+          display: inline-flex; align-items: center; gap: 0.45rem;
+          font-family: var(--font-poppins); font-weight: 700; font-size: 0.9375rem;
+          color: var(--accent-orange);
         }
-        .is-site .home-celebrations__grid .celeb-card__body h3 {
-          font-size: 1rem;
-          margin-bottom: 0.25rem;
-        }
-        .is-site .home-celebrations__grid .celeb-card__body p {
-          font-size: 0.875rem;
-          line-height: 1.45;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
+        .fest__read svg { transition: transform var(--transition-fast); }
+        .fest__read:hover svg { transform: translateX(0.25rem); }
+
+        /* pair-change fade (skipped under reduced motion) */
+        @media (prefers-reduced-motion: no-preference) {
+          .fest__big, .fest__small, .fest__text, .fest__textb { animation: festIn 0.55s ease both; }
+          @keyframes festIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
         }
 
-        .is-site .home-celebrations__more {
-          margin-top: 2.5rem;
-          text-align: center;
-        }
-        .is-site .home-celebrations__empty {
-          padding: 3rem 0;
-          color: var(--heritage-muted);
-          text-align: center;
-          font-size: 1.0625rem;
-        }
-
-        @media (max-width: 1100px) {
-          .is-site .home-celebrations__grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-        @media (max-width: 760px) {
-          .is-site .home-celebrations__grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 480px) {
-          .is-site .home-celebrations__grid {
+        @media (max-width: 768px) {
+          .fest__grid {
             grid-template-columns: 1fr;
+            grid-template-areas: "intro" "big" "text" "small" "smalltext";
           }
-          .is-site .home-celebrations__title {
-            font-size: 2.5rem;
-          }
+          .fest__textb { margin-left: 0; }
+          .fest__small { margin-top: 0; width: 100%; }
+          .fest__big { aspect-ratio: 4 / 3; }
+          .fest__small { aspect-ratio: 16 / 11; }
         }
       `}</style>
     </section>

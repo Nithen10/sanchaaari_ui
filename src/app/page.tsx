@@ -1,18 +1,18 @@
-import HeroSlider from "@/components/HeroSlider";
+import HeroVideo from "@/components/HeroVideo";
 import HomeBodyLock from "@/components/HomeBodyLock";
 import HomeBelow from "@/components/site/HomeBelow";
-import StickyContact from "@/components/site/StickyContact";
+import SmoothScroll from "@/components/site/SmoothScroll";
 
 export default function Home() {
   return (
     <>
+      <SmoothScroll />
       <HomeBodyLock />
       <a href="#home-below" className="skip-link">
         Skip to content
       </a>
-      <HeroSlider />
+      <HeroVideo />
       <HomeBelow />
-      <StickyContact />
     </>
   );
 }

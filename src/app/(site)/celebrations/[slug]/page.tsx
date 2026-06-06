@@ -243,7 +243,7 @@ export default async function CelebrationDetailPage({
           font-size: 0.9375rem;
           border-radius: var(--radius-sm);
           margin: 1.25rem 0 0.75rem;
-          box-shadow: 0 0.25rem 0.625rem rgba(0, 95, 115, 0.35);
+          box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.28);
         }
         .celeb-hero__title {
           font-family: var(--font-fraunces);

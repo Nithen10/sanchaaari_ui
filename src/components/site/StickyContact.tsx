@@ -1,5 +1,30 @@
 import { BUSINESS, buildWhatsAppUrl, buildTelUrl } from "@/lib/contact";
 
+// Critical inline styles so the floating buttons render correctly on the very
+// first paint, before globals.css loads (prevents the unstyled-icon flash / FOUC).
+const CONTAINER_STYLE = {
+  position: "fixed",
+  right: "clamp(1rem, 2vw, 1.5rem)",
+  bottom: "clamp(1rem, 2vw, 1.5rem)",
+  zIndex: 80,
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.625rem",
+  pointerEvents: "none",
+} as const;
+
+const BTN_STYLE = {
+  pointerEvents: "auto",
+  width: "3.5rem",
+  height: "3.5rem",
+  borderRadius: "50%",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#fff",
+  boxShadow: "0 0.5rem 1.25rem rgba(0,0,0,0.18)",
+} as const;
+
 export default function StickyContact() {
   const waUrl = buildWhatsAppUrl(
     `Hello Sanchaari, I'd like to enquire about a journey.`
@@ -7,24 +32,26 @@ export default function StickyContact() {
   const telUrl = buildTelUrl();
 
   return (
-    <div className="sticky-contact" aria-label="Quick contact">
+    <div className="sticky-contact" style={CONTAINER_STYLE} aria-label="Quick contact">
       <a
         href={waUrl}
         target="_blank"
         rel="noreferrer noopener"
         className="sc-wa"
+        style={{ ...BTN_STYLE, background: "#25d366" }}
         aria-label={`Chat with ${BUSINESS.name} on WhatsApp`}
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
           <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.815 11.815 0 0 1 3.488 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" />
         </svg>
       </a>
       <a
         href={telUrl}
         className="sc-call"
+        style={{ ...BTN_STYLE, background: "var(--heritage-rust, #0c2340)" }}
         aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phone}`}
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
           <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
         </svg>
       </a>

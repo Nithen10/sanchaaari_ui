@@ -243,7 +243,7 @@ export default function ItineraryCard({ pkg }: { pkg: Package }) {
           font-family: var(--font-poppins);
           font-size: 0.8125rem;
           font-weight: 700;
-          color: var(--heritage-rust);
+          color: var(--accent-orange);
           letter-spacing: 0.01em;
         }
         .itin-card__cta-arrow {

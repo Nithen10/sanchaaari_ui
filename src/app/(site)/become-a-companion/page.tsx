@@ -221,7 +221,7 @@ export default function BecomeACompanionPage() {
         .bc-form { display: flex; flex-direction: column; gap: 1.25rem; }
         .bc-form h2, .bc-success h2 { margin-bottom: 0.5rem; }
         .bc-error {
-          background: rgba(0,95,115,0.08);
+          background: var(--heritage-rust-tint);
           color: var(--heritage-rust-dk);
           padding: 0.75rem 1rem;
           border-radius: var(--radius-md);

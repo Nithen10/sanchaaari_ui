@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Reveal from "@/components/site/GSAPReveal";
 import BreadcrumbTrail from "@/components/site/BreadcrumbTrail";
 import Filters from "@/components/site/Filters";
@@ -26,6 +27,11 @@ export default function ToursPage() {
               journey that fits your pace. Every tour can be customised, and
               every senior traveller can add a personal companion.
             </p>
+            <div className="tours-hero__cta">
+              <Link href="/tours/custom" className="btn btn--primary btn--lg">
+                Customize your trip →
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -39,6 +45,7 @@ export default function ToursPage() {
       <style>{`
         .tours-hero { padding-bottom: 2rem; }
         .tours-hero h1 { max-width: 22ch; margin-block: 0.5rem 1.25rem; }
+        .tours-hero__cta { margin-top: 1.5rem; }
       `}</style>
     </>
   );

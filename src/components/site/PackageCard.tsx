@@ -361,7 +361,7 @@ export default function PackageCard({ pkg }: { pkg: Package }) {
           color: inherit;
           text-decoration: none;
         }
-        .pkg-card__title a:hover { color: var(--heritage-rust); }
+        .pkg-card__title a:hover { color: var(--accent-orange); }
         .pkg-card__top {
           flex-shrink: 0;
           font-family: var(--font-poppins);
@@ -454,7 +454,7 @@ export default function PackageCard({ pkg }: { pkg: Package }) {
           background: var(--heritage-rust-dk);
           color: var(--heritage-ivory);
           transform: translateY(-1px);
-          box-shadow: 0 0.5rem 1rem rgba(0, 95, 115, 0.28);
+          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.22);
         }
         .pkg-card__cta-arrow {
           transition: transform var(--transition-fast);

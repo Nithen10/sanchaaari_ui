@@ -1,23 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins, Fraunces, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Archivo } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const poppins = Poppins({
+// Sans (body / UI) — Archivo, a free grotesque close to the reference's "Shapiro".
+const poppins = Archivo({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const fraunces = Fraunces({
+// Serif (headings / wordmarks) — Cormorant Garamond, an elegant high-contrast serif.
+const fraunces = Cormorant_Garamond({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  axes: ["opsz"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-const manrope = Manrope({
+// Inner-site body also uses the same sans (Archivo) via --font-manrope.
+const manrope = Archivo({
   variable: "--font-manrope",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -67,10 +72,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${poppins.variable} ${fraunces.variable} ${manrope.variable} ${instrumentSerif.variable}`}
         style={{ fontFamily: "var(--font-poppins)" }}
+        suppressHydrationWarning
       >
         {children}
       </body>

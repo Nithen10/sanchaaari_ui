@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import SiteHeader from "@/components/site/SiteHeader";
 import SiteFooter from "@/components/site/SiteFooter";
-import StickyContact from "@/components/site/StickyContact";
 import SiteBodyClass from "@/components/site/SiteBodyClass";
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
@@ -16,7 +15,6 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
         {children}
       </main>
       <SiteFooter />
-      <StickyContact />
     </>
   );
 }

@@ -9,6 +9,8 @@ export interface StateInfo {
   slug: StateSlug;
   name: string;
   tagline: string;
+  highlights: string[];
+  tags: string[];
   intro: string;
   hero: string;
   signatureTempleSlug: string;
@@ -23,6 +25,12 @@ export const STATES: StateInfo[] = [
     slug: "tamil-nadu",
     name: "Tamil Nadu",
     tagline: "Land of a thousand gopurams",
+    highlights: [
+      "Four temple-town pillars",
+      "Senior-paced darshan",
+      "Private transfers throughout",
+    ],
+    tags: ["Temples", "Heritage"],
     intro:
       "The cradle of Dravidian devotion. Tamil Nadu's temple towns of Madurai, Thanjavur, Rameshwaram and Chidambaram preserve continuous worship lineages of more than a thousand years, set against soaring sculpted towers and bronze masterworks.",
     hero: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=2400&q=85&auto=format&fit=crop",
@@ -42,6 +50,12 @@ export const STATES: StateInfo[] = [
     slug: "kerala",
     name: "Kerala",
     tagline: "Backwaters and quiet sanctums",
+    highlights: [
+      "Backwater houseboat stays",
+      "Ayurveda by the coast",
+      "Padmanabhaswamy & Guruvayur",
+    ],
+    tags: ["Backwaters", "Ayurveda"],
     intro:
       "Where coconut groves meet ancient shrines. Kerala blends the spiritual gravity of Padmanabhaswamy and Guruvayur with the green calm of houseboats, Ayurveda retreats and the misty Western Ghats.",
     hero: "https://images.unsplash.com/photo-1589707787376-98f208f4b307?w=2400&q=85&auto=format&fit=crop",
@@ -61,6 +75,12 @@ export const STATES: StateInfo[] = [
     slug: "karnataka",
     name: "Karnataka",
     tagline: "Imperial heritage, sacred coast",
+    highlights: [
+      "Hoysala & Hampi heritage",
+      "Sacred Murudeshwar coast",
+      "Comfortable hill drives",
+    ],
+    tags: ["Heritage", "Coast"],
     intro:
       "From the Hoysala marvels of Belur and Halebidu to the Vijayanagara ruins of Hampi and the towering Shiva of Murudeshwar, Karnataka weaves royal courts, monastic silences, and a long coastline into a single travel canvas.",
     hero: "https://images.unsplash.com/photo-1693205118032-9382f7267f55?w=2400&q=85&auto=format&fit=crop",
@@ -80,6 +100,12 @@ export const STATES: StateInfo[] = [
     slug: "andhra-pradesh",
     name: "Andhra Pradesh",
     tagline: "Where mountains hold the divine",
+    highlights: [
+      "Tirumala darshan arranged",
+      "Lepakshi rock frescoes",
+      "Restful forest drives",
+    ],
+    tags: ["Pilgrimage", "Hills"],
     intro:
       "Anchored by the seven hills of Tirumala, the world's most-visited shrine, Andhra Pradesh layers the rock-cut frescoes of Lepakshi, the Buddhist hills of Amaravati and the calm beaches of the Coromandel coast.",
     hero: "/images/tirupati-temple.png",
@@ -99,6 +125,12 @@ export const STATES: StateInfo[] = [
     slug: "telangana",
     name: "Telangana",
     tagline: "Deccan grandeur",
+    highlights: [
+      "Charminar & old city",
+      "Kakatiya Ramappa temple",
+      "Bhadrachalam Rama shrine",
+    ],
+    tags: ["Deccan", "Forts"],
     intro:
       "The Deccan plateau at its richest. Telangana threads the four-minaret Charminar, Nizami palaces, the Kakatiya Ramappa temple and the Bhadrachalam Rama shrine into a heritage trail with a thoroughly modern pulse.",
     hero: "/images/ramappa-temple.png",

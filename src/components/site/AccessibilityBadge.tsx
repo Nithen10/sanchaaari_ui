@@ -46,8 +46,8 @@ export default function AccessibilityBadge({
         .access-pill.ok .access-pill__icon { filter: none; }
         .access-pill.warn {
           color: var(--heritage-muted);
-          background: rgba(0,95,115,0.04);
-          border-color: rgba(0,95,115,0.22);
+          background: rgba(134,109,75,0.10);
+          border-color: rgba(134,109,75,0.40);
         }
         .access-pill__icon { font-size: 1rem; line-height: 1; }
       `}</style>

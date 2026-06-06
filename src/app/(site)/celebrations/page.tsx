@@ -431,7 +431,7 @@ export default function CelebrationsHubPage() {
         .celeb-hub__dd-btn:hover { border-color: var(--heritage-rust); }
         .celeb-hub__dd-btn[aria-expanded="true"] {
           border-color: var(--heritage-rust);
-          box-shadow: 0 0 0 3px rgba(0, 95, 115, 0.12);
+          box-shadow: 0 0 0 3px rgba(26, 28, 25, 0.12);
         }
         .celeb-hub__dd-caret { font-size: 0.75rem; color: var(--heritage-muted); }
         .celeb-hub__dd-panel {
