@@ -24,17 +24,15 @@ const SORT_LABELS: Record<SortKey, string> = {
   "rating-desc": "Rating",
 };
 
+const PAGE_SIZE = 4;
+
 export default function HomeItineraries() {
   const [view, setView] = useState<"grid" | "list">("grid");
   const [sort, setSort] = useState<SortKey>("featured");
-
-  const featured = useMemo(
-    () => [...PACKAGES].sort((a, b) => score(a) - score(b)).slice(0, 6),
-    [],
-  );
+  const [page, setPage] = useState(1);
 
   const items = useMemo(() => {
-    const list = [...featured];
+    const list = [...PACKAGES];
     switch (sort) {
       case "price-asc":
         return list.sort((a, b) => a.priceFrom - b.priceFrom);
@@ -45,9 +43,20 @@ export default function HomeItineraries() {
       case "rating-desc":
         return list.sort((a, b) => b.rating - a.rating);
       default:
-        return list; // featured (badge order)
+        return list.sort((a, b) => score(a) - score(b)); // featured (badge order)
     }
-  }, [featured, sort]);
+  }, [sort]);
+
+  const total = items.length;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const current = Math.min(page, totalPages);
+  const start = (current - 1) * PAGE_SIZE;
+  const pageItems = items.slice(start, start + PAGE_SIZE);
+
+  const onSort = (k: SortKey) => {
+    setSort(k);
+    setPage(1);
+  };
 
   return (
     <section className="site-section home-itin">
@@ -118,7 +127,7 @@ export default function HomeItineraries() {
             <span>Sort by:</span>
             <select
               value={sort}
-              onChange={(e) => setSort(e.target.value as SortKey)}
+              onChange={(e) => onSort(e.target.value as SortKey)}
               aria-label="Sort journeys"
             >
               {(Object.keys(SORT_LABELS) as SortKey[]).map((k) => (
@@ -131,10 +140,45 @@ export default function HomeItineraries() {
         </div>
 
         <div className={view === "grid" ? "home-itin__grid" : "home-itin__list"}>
-          {items.map((p) => (
+          {pageItems.map((p) => (
             <JourneyCard key={p.slug} pkg={p} variant={view} />
           ))}
         </div>
+
+        <nav className="home-itin__pager" aria-label="Itineraries pages">
+          <button
+            type="button"
+            className="home-itin__pg-arrow"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={current === 1}
+            aria-label="Previous page"
+          >
+            ‹
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+            <button
+              key={n}
+              type="button"
+              className={`home-itin__pg-num${n === current ? " is-active" : ""}`}
+              aria-current={n === current ? "page" : undefined}
+              onClick={() => setPage(n)}
+            >
+              {n}
+            </button>
+          ))}
+          <button
+            type="button"
+            className="home-itin__pg-arrow"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={current === totalPages}
+            aria-label="Next page"
+          >
+            ›
+          </button>
+        </nav>
+        <p className="home-itin__count">
+          {total === 0 ? 0 : start + 1}–{Math.min(start + PAGE_SIZE, total)} of {total} results
+        </p>
 
         <div className="home-itin__more">
           <Link href="/tours" className="btn btn--primary btn--lg">
@@ -145,7 +189,7 @@ export default function HomeItineraries() {
 
       <style>{`
         .is-site .home-itin > .site-container {
-          max-width: 80rem;
+          max-width: 107rem;
           margin-inline: auto;
           padding-inline: clamp(1rem, 3vw, 2rem);
         }
@@ -233,14 +277,68 @@ export default function HomeItineraries() {
         /* Layouts */
         .home-itin__grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 1.25rem;
         }
         .home-itin__list {
           display: flex; flex-direction: column; gap: 1.5rem;
           max-width: 78rem; margin-inline: auto;
         }
-        .home-itin__more { margin-top: 2.75rem; text-align: center; }
+        /* Pagination */
+        .home-itin__pager {
+          display: flex; align-items: center; justify-content: center;
+          gap: 0.4rem; margin-top: 2.25rem;
+        }
+        .home-itin__pg-num, .home-itin__pg-arrow {
+          min-width: 2rem; height: 2rem; padding: 0 0.4rem;
+          display: inline-flex; align-items: center; justify-content: center;
+          background: transparent; border: 0; cursor: pointer;
+          font-family: var(--font-poppins); font-size: 0.95rem;
+          color: var(--heritage-muted); border-radius: var(--radius-sm, 0.4rem);
+          transition: color 0.2s ease, background 0.2s ease;
+        }
+        .home-itin__pg-num:hover, .home-itin__pg-arrow:hover:not(:disabled) {
+          color: var(--heritage-ink); background: var(--heritage-rust-tint);
+        }
+        .home-itin__pg-num.is-active {
+          color: var(--heritage-ink); font-weight: 700;
+        }
+        .home-itin__pg-arrow { font-size: 1.25rem; }
+        .home-itin__pg-arrow:disabled { opacity: 0.35; cursor: default; }
+        .is-site .home-itin__count {
+          margin: 0.5rem 0 0; text-align: center;
+          font-family: var(--font-poppins); font-size: 0.8125rem;
+          color: var(--heritage-muted);
+        }
+        .home-itin__more { margin-top: 2.25rem; text-align: center; }
+
+        /* Dark torn-paper treatment (matches the States band) */
+        .home-itin { background: #2d2d2d; }
+        .is-site .home-itin .home-itin__title { color: #ffffff; }
+        .is-site .home-itin .home-itin__lead { color: rgba(255, 255, 255, 0.72); }
+        .is-site .home-itin .home-itin__eyebrow { color: var(--accent-orange); }
+        .home-itin .home-itin__bar { border-bottom-color: rgba(255, 255, 255, 0.15); }
+        .home-itin .home-itin__view button { color: rgba(255, 255, 255, 0.7); }
+        .home-itin .home-itin__view button:hover { color: #fff; }
+        .home-itin .home-itin__view button.is-active { color: #fff; background: rgba(255, 255, 255, 0.12); }
+        .home-itin .home-itin__tabs button { color: rgba(255, 255, 255, 0.7); }
+        .home-itin .home-itin__tabs button.is-active { color: #fff; border-bottom-color: #fff; }
+        .home-itin .home-itin__sort { color: rgba(255, 255, 255, 0.7); }
+        .home-itin .home-itin__sort select {
+          color: #fff;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+        }
+        .home-itin .home-itin__sort select option { color: #1b1a18; }
+        .home-itin .home-itin__pg-num, .home-itin .home-itin__pg-arrow { color: rgba(255, 255, 255, 0.65); }
+        .home-itin .home-itin__pg-num:hover, .home-itin .home-itin__pg-arrow:hover:not(:disabled) { color: #fff; background: rgba(255, 255, 255, 0.1); }
+        .home-itin .home-itin__pg-num.is-active { color: #fff; }
+        .is-site .home-itin .home-itin__count { color: rgba(255, 255, 255, 0.6); }
+        .is-site .home-itin .home-itin__more .btn--primary {
+          background: linear-gradient(135deg, #c8a868 0%, #866d4b 100%);
+          color: #1b1a18;
+          box-shadow: 0 0.5rem 1.4rem rgba(0, 0, 0, 0.35);
+        }
+        .is-site .home-itin .home-itin__more .btn--primary:hover { filter: brightness(1.06); }
 
         @media (max-width: 1100px) {
           .home-itin__grid { grid-template-columns: repeat(2, 1fr); }

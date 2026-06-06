@@ -102,20 +102,19 @@ export default function HomeBelow() {
 
       <TornDivider seed={3} color="#2d2d2d" />
 
-      <HomeItineraries />
+      <HomeCelebrations />
 
       <TornDivider seed={4} color="var(--paper-1)" />
 
-      <HomeCelebrations />
+      <HomeItineraries />
 
-      <TornDivider seed={6} color="var(--paper-1)" />
+      <TornDivider seed={6} color="#2d2d2d" />
 
       <HomeJourney />
 
       <TornDivider seed={7} color="var(--paper-1)" />
 
       <section className="site-section home-tmt">
-        <div className="sec-map" aria-hidden="true" style={{ backgroundPosition: "left center" }} />
         <div className="site-container home-tmt__wrap">
           <Testimonials
             items={TESTIMONIALS.slice(0, 3)}
@@ -130,7 +129,7 @@ export default function HomeBelow() {
         </div>
       </section>
 
-      <TornDivider seed={8} color="var(--paper-1)" />
+      <TornDivider seed={8} color="#2d2d2d" />
 
       <HomeFAQ />
 
@@ -169,8 +168,14 @@ export default function HomeBelow() {
           overflow: hidden;
         }
         .home-states__wrap { position: relative; z-index: 1; }
-        .home-tmt { position: relative; overflow: hidden; }
+        .home-tmt { position: relative; overflow: hidden; background: #2d2d2d; }
         .home-tmt__wrap { position: relative; z-index: 1; }
+        /* dark torn-paper treatment for reviews — readable text */
+        .is-site .home-tmt .section-title { color: #ffffff; }
+        .is-site .home-tmt .section-lead { color: rgba(255, 255, 255, 0.72); }
+        .is-site .home-tmt .eyebrow { color: var(--accent-orange); }
+        .is-site .home-tmt .btn--ghost { color: #fff; border-color: rgba(255, 255, 255, 0.55); }
+        .is-site .home-tmt .btn--ghost:hover { background: #fff; color: #1b1a18; border-color: #fff; }
         .home-states-section > .site-container {
           max-width: 108rem;
           margin-inline: auto;

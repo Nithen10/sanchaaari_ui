@@ -16,7 +16,6 @@ const HOME_FAQS = [
 export default function HomeFAQ() {
   return (
     <section className="site-section home-faq">
-      <div className="sec-map" aria-hidden="true" style={{ backgroundPosition: "right center" }} />
       <div className="site-container home-faq__inner">
         <Reveal from="bottom">
           <h2 className="home-faq__title">Frequently Asked Questions</h2>

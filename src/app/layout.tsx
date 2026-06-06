@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Archivo } from "next/font/google";
+import { Archivo } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -12,12 +12,18 @@ const poppins = Archivo({
   display: "swap",
 });
 
-// Serif (headings / wordmarks) — Cormorant Garamond, an elegant high-contrast serif.
-const fraunces = Cormorant_Garamond({
+// Serif (headings / wordmarks) — SangBleu Republic, a calligraphic high-contrast serif.
+// Kept under the --font-fraunces variable so every existing rule picks it up unchanged.
+const fraunces = localFont({
+  src: [
+    { path: "./fonts/SangBleuRepublicTrial-Regular.otf", weight: "400", style: "normal" },
+    { path: "./fonts/SangBleuRepublicTrial-RegularItalic.otf", weight: "400", style: "italic" },
+    { path: "./fonts/SangBleuRepublicTrial-Medium.otf", weight: "500", style: "normal" },
+    { path: "./fonts/SangBleuRepublicTrial-MediumItalic.otf", weight: "500", style: "italic" },
+    { path: "./fonts/SangBleuRepublicTrial-Bold.otf", weight: "600 700", style: "normal" },
+    { path: "./fonts/SangBleuRepublicTrial-BoldItalic.otf", weight: "600 700", style: "italic" },
+  ],
   variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
   display: "swap",
 });
 

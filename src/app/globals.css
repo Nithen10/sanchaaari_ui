@@ -1648,19 +1648,6 @@ body.is-site {
   fill: currentColor;
 }
 
-/* Faint world line-art map behind selected sections (Journey / Testimonials / FAQ) */
-.sec-map {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url(/images/world-map.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  opacity: 0.55;
-}
-
 /* Footer */
 .site-footer {
   background: #1b1a18;
