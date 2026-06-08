@@ -157,12 +157,6 @@ export default function SiteFooter() {
           </span>
         </div>
 
-        <p className="site-footer__credit">
-          Torn-paper texture designed by{" "}
-          <a href="https://www.freepik.com" target="_blank" rel="noreferrer noopener">
-            kjpargeter / Freepik
-          </a>
-        </p>
       </div>
 
       <style>{`

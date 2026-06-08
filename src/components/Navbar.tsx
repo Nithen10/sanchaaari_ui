@@ -36,14 +36,6 @@ const Navbar: React.FC = () => {
         ))}
       </ul>
 
-      <div className="navbar-right" id="navbar-right">
-        <Link href="/tours" className="navbar-cta" id="nav-plan-trip">
-          Plan a trip
-          <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
-            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
-          </svg>
-        </Link>
-      </div>
     </nav>
   );
 };

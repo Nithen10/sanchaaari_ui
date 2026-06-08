@@ -99,7 +99,7 @@ export default function HeroVideo() {
           ))}
         </h1>
         <p className="hero-video__tagline">
-          Temple trails and heritage journeys across the South —
+          Temple trails and heritage journeys across the South,
           <br />
           arranged with care, paced for unhurried hearts.
         </p>
@@ -170,19 +170,19 @@ export default function HeroVideo() {
           letter-spacing: 0.34em;
           font-size: clamp(0.7rem, 1vw, 0.85rem);
           font-weight: 600;
-          color: var(--heritage-gold);
+          color: #ffffff;
           margin-bottom: clamp(0.9rem, 1.6vw, 1.5rem);
-          text-shadow: 0 0.15rem 0.7rem rgba(0,0,0,0.55);
+          text-shadow: 0 1px 6px rgba(0,0,0,0.80), 0 2px 16px rgba(0,0,0,0.55);
         }
         .hero-video__rule {
           display: inline-block;
           width: clamp(1.5rem, 4vw, 3.25rem);
           height: 1px;
           transform-origin: center;
-          background: linear-gradient(90deg, transparent, var(--heritage-gold));
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.75));
         }
         .hero-video__rule:last-child {
-          background: linear-gradient(90deg, var(--heritage-gold), transparent);
+          background: linear-gradient(90deg, rgba(255,255,255,0.75), transparent);
         }
         .hero-video__title {
           font-family: var(--font-fraunces), serif;
@@ -257,7 +257,7 @@ export default function HeroVideo() {
         }
         .hero-video__btn--outline:hover {
           background: rgba(255,255,255,0.95);
-          color: #0c2340;
+          color: #2d2d2d;
           border-color: #fff;
           transform: translateY(-3px);
         }

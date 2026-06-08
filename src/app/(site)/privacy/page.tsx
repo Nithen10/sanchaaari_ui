@@ -21,8 +21,8 @@ export default function PrivacyPage() {
           <h1>Privacy Policy</h1>
           <p className="legal-page__meta">Last updated: June 2026</p>
           <p>
-            We collect only the information needed to plan and arrange your journey —
-            such as your name, contact details and travel preferences — and we never
+            We collect only the information needed to plan and arrange your journey,
+            such as your name, contact details and travel preferences, and we never
             sell it. We use it to respond to enquiries, prepare itineraries and keep
             you informed about your booking. The full policy is being finalised and
             will appear here shortly.

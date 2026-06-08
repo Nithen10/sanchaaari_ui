@@ -34,7 +34,7 @@ export default function HomeBelow() {
             </h2>
             <p className="section-lead home-states__lead">
               Each one carved by centuries of devotion, craft, and quiet
-              hospitality. Choose where your journey begins — we&rsquo;ll plan
+              hospitality. Choose where your journey begins, and we&rsquo;ll plan
               the rest.
             </p>
           </Reveal>
@@ -182,7 +182,8 @@ export default function HomeBelow() {
         }
         @media (min-width: 961px) {
           .home-states-section {
-            padding-block: clamp(2rem, 5vh, 4rem);
+            padding-block-start: clamp(4rem, 9vh, 6rem);
+            padding-block-end: clamp(2rem, 5vh, 4rem);
           }
         }
         .home-states__head {
@@ -324,7 +325,7 @@ export default function HomeBelow() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          color: #0c2340;
+          color: #2d2d2d;
           background: rgba(255, 255, 255, 0.92);
           border: 1px solid rgba(255, 255, 255, 0.5);
           backdrop-filter: blur(6px);

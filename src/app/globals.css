@@ -23,9 +23,9 @@
   font-size: clamp(0.625rem, 0.834vw, 1rem);
 
   /* Background */
-  --bg-primary: #0c2340;
-  --bg-dark: #081a30;
-  --bg-gradient: linear-gradient(135deg, #0c2340 0%, #0a1f3a 45%, #081a30 100%);
+  --bg-primary: #2d2d2d;
+  --bg-dark:    #222222;
+  --bg-gradient: linear-gradient(135deg, #2d2d2d 0%, #272727 45%, #222222 100%);
 
   /* Text */
   --text-white: #ffffff;
@@ -63,14 +63,14 @@
   --heritage-cream:     #f4f2ef;
   --heritage-cream-2:   #ede9e4;
   --heritage-ivory:     #ffffff;
-  --heritage-ink:       #0c2340;
+  --heritage-ink:       #2d2d2d;
   --heritage-sub:       #262626;
   --heritage-muted:     #6d6d6d;
-  --heritage-line:      rgba(12, 35, 64, 0.10);
-  --heritage-line-strong: rgba(12, 35, 64, 0.20);
-  --heritage-rust:      #0c2340;
-  --heritage-rust-dk:   #16345a;
-  --heritage-rust-tint: rgba(12, 35, 64, 0.06);
+  --heritage-line:      rgba(45, 45, 45, 0.10);
+  --heritage-line-strong: rgba(45, 45, 45, 0.20);
+  --heritage-rust:      #2d2d2d;
+  --heritage-rust-dk:   #1a1a1a;
+  --heritage-rust-tint: rgba(45, 45, 45, 0.06);
   --heritage-gold:      #866d4b;
   --heritage-gold-dk:   #6f5a3d;
   --heritage-teal:      #866d4b;

@@ -48,7 +48,7 @@ export default function StickyContact() {
       <a
         href={telUrl}
         className="sc-call"
-        style={{ ...BTN_STYLE, background: "var(--heritage-rust, #0c2340)" }}
+        style={{ ...BTN_STYLE, background: "var(--heritage-rust, #2d2d2d)" }}
         aria-label={`Call ${BUSINESS.name} at ${BUSINESS.phone}`}
       >
         <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">

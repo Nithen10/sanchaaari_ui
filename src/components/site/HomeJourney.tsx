@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const STOPS = [
   {
     title: "End-to-end journey planning",
-    text: "Hotels, transfers, darshan slots and permits — arranged end to end so all you do is travel.",
+    text: "Hotels, transfers, darshan slots and permits, arranged end to end so all you do is travel.",
     img: "https://images.unsplash.com/photo-1589707787376-98f208f4b307?w=1100&q=80&auto=format&fit=crop",
   },
   {
@@ -21,7 +21,7 @@ const STOPS = [
   },
   {
     title: "24/7 assistance",
-    text: "Real people on call around the clock — before, during and after your journey.",
+    text: "Real people on call around the clock: before, during and after your journey.",
     img: "https://images.unsplash.com/photo-1693205118032-9382f7267f55?w=1100&q=80&auto=format&fit=crop",
   },
   {

@@ -27,13 +27,13 @@ export default function HomeAbout() {
         <Reveal from="right" className="home-about__text">
           <span className="eyebrow home-about__eyebrow">The Sanchaari way</span>
           <h2 className="home-about__title">
-            More than a tour —{" "}
+            More than a tour.{" "}
             <span className="home-about__title-accent">
-              journeys made for unhurried hearts.
+              Journeys made for unhurried hearts.
             </span>
           </h2>
           <p className="home-about__lead">
-            We plan South India&rsquo;s temple trails the slow way — darshan slots
+            We plan South India&rsquo;s temple trails the slow way, with darshan slots
             arranged ahead, comfortable stays, gentle days, and a companion
             whenever you&rsquo;d like one. You travel; we hold every detail.
           </p>

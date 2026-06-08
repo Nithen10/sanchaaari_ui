@@ -193,6 +193,9 @@ export default function HomeItineraries() {
           margin-inline: auto;
           padding-inline: clamp(1rem, 3vw, 2rem);
         }
+        .home-itin {
+          padding-block-end: clamp(1.5rem, 3vw, 2.5rem);
+        }
         .is-site .home-itin__head {
           text-align: center;
           margin-bottom: 2.5rem;
